@@ -494,15 +494,14 @@
                 No spam. Only early access, launch updates, and creator opportunities.
             </p>
 
-
             <form action="https://buttondown.com/api/emails/embed-subscribe/picanik" method="post" class="signup-form">
                 <!-- Email (required) -->
                 <label for="email">Email address</label>
                 <input id="email" name="email" type="email" placeholder="you@example.com" required />
 
-                <!-- Role (custom field) -->
+                <!-- Role (metadata) -->
                 <label for="role">I am a...</label>
-                <select id="role" name="metadata[role]" class="field-select" style="background:#0B1020;color:#EAF0FF;">
+                <select id="role" name="metadata__role" class="field-select" style="background:#0B1020;color:#EAF0FF;">
                     <option value="mod_dev">Mod developer</option>
                     <option value="server_owner">Server owner / operator</option>
                     <option value="player">Player</option>
@@ -510,15 +509,17 @@
                     <option value="other">Other</option>
                 </select>
 
-                <!-- Notes (custom field) -->
+                <!-- Notes (metadata) -->
                 <label for="notes">Optional: what are you building or running?</label>
-                <textarea id="notes" name="metadata[notes]" rows="3"
+                <textarea id="notes" name="metadata__notes" rows="3"
                     placeholder="Mod idea, server concept, tooling, etc."></textarea>
 
-                <!-- Optional source tracking -->
-                <input type="hidden" name="metadata[source]" value="landing_page" />
+                <!-- Optional: track source (metadata) -->
+                <input type="hidden" name="metadata__source" value="landing_page" />
 
-                <!-- Submit -->
+                <!-- Optional: Buttondown recommends embed=1 in some examples -->
+                <input type="hidden" name="embed" value="1" />
+
                 <button type="submit" class="btn btn-primary">Notify me</button>
             </form>
 
