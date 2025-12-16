@@ -495,12 +495,17 @@
             </p>
 
 
-            <form action="YOUR_EMAIL_FORM_ENDPOINT_HERE" method="post" class="signup-form">
+            <form action="https://buttondown.email/api/emails/embed-subscribe/picanik" method="post"
+                class="signup-form">
+
+                <!-- Required by Buttondown -->
+                <input type="hidden" name="embed" value="1">
+
                 <label for="email">Email address</label>
                 <input id="email" name="email" type="email" placeholder="you@example.com" required />
 
                 <label for="role">I am a...</label>
-                <select id="role" name="role" class="field-select" style="background:#0B1020;color:#EAF0FF;">
+                <select id="role" name="metadata[role]" class="field-select">
                     <option value="mod_dev">Mod developer</option>
                     <option value="server_owner">Server owner / operator</option>
                     <option value="player">Player</option>
@@ -509,11 +514,17 @@
                 </select>
 
                 <label for="notes">Optional: what are you building or running?</label>
-                <textarea id="notes" name="notes" rows="3"
+                <textarea id="notes" name="metadata[notes]" rows="3"
                     placeholder="Mod idea, server concept, tooling, etc."></textarea>
 
-                <button type="submit" class="btn btn-primary">Notify me</button>
+                <!-- Optional: source tracking -->
+                <input type="hidden" name="metadata[source]" value="landing_page">
+
+                <button type="submit" class="btn btn-primary">
+                    Notify me
+                </button>
             </form>
+
 
             <p>
                 Prefer Discord? <a href="https://discord.gg/T6K8Pcc3wP" target="_blank" rel="noopener noreferrer">Join
