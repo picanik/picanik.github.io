@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Picanik — Hytale Mod Infrastructure</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <meta name="description"
+        content="Picanik is the mod infrastructure for Hytale — built for creators, server owners, and serious players. Join the Discord and get early access updates." />
+    <style>
+        :root {
+            --bg: #0B1020;
+            --surface: #111A33;
+            --border: #223055;
+            --text: #EAF0FF;
+            --muted: #B7C3E6;
+
+            --accent: #6AE4FF;
+            /* primary */
+            --accent2: #7CFFB2;
+            /* optional */
+
+            --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+            --radius: 16px;
+            --max: 1040px;
+
+            --font: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        }
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* nice smooth anchor scrolling */
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            /* solid base */
+            color: var(--text);
+            font-family: var(--font);
+            line-height: 1.55;
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        input,
+        textarea {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            user-select: text;
+        }
+
+        /* fixed background layer that never repeats */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background:
+                radial-gradient(1200px 600px at 20% 0%, rgba(106, 228, 255, .12), transparent 60%),
+                radial-gradient(900px 500px at 80% 10%, rgba(124, 255, 178, .08), transparent 55%),
+                var(--bg);
+            background-repeat: no-repeat;
+        }
+
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        header {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 28px 18px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            letter-spacing: .2px;
+            font-size: 20px;
+        }
+
+        .brand .mark {
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            font-weight: 900;
+            background: linear-gradient(135deg, rgba(106, 228, 255, .28), rgba(124, 255, 178, .16));
+            border: 1px solid rgba(106, 228, 255, .25);
+            box-shadow: var(--shadow);
+        }
+
+        .brand .word {
+            text-transform: lowercase;
+        }
+
+        .logo-accent {
+            /* If you want ONE solid nicer color, use: color: #9AD7FF; */
+            background: linear-gradient(90deg, rgba(106, 228, 255, .95), rgba(124, 255, 178, .85));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 18px rgba(106, 228, 255, .18);
+        }
+
+        nav {
+            display: flex;
+            gap: 14px;
+        }
+
+        nav a {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        main {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 18px;
+        }
+
+        .section {
+            margin: 26px 0;
+            padding: 22px;
+            background: rgba(17, 26, 51, .72);
+            /* surface */
+            border: 1px solid rgba(34, 48, 85, .75);
+            border-radius: var(--radius);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, .22);
+            backdrop-filter: blur(8px);
+        }
+
+
+        .hero {
+            padding: 30px 24px;
+        }
+
+        .hero h1 {
+            margin: 0 0 10px;
+            font-size: 44px;
+            line-height: 1.08;
+            letter-spacing: -.8px;
+        }
+
+        .hero p {
+            margin: 10px 0;
+            color: var(--muted);
+            font-size: 18px;
+            max-width: 70ch;
+        }
+
+        .cta-row {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
+
+        .btn {
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 16px;
+            border-radius: 14px;
+            border: 1px solid rgba(34, 48, 85, .9);
+            background: rgba(255, 255, 255, .02);
+            color: var(--text);
+            font-weight: 650;
+            letter-spacing: .2px;
+            min-width: 210px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, rgba(106, 228, 255, .24), rgba(106, 228, 255, .06));
+            border: 1px solid rgba(106, 228, 255, .35);
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-primary span {
+            color: var(--accent);
+        }
+
+        .kicker {
+            margin-top: 14px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .grid3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .card {
+            padding: 18px;
+            background: rgba(11, 16, 32, .45);
+            border: 1px solid rgba(34, 48, 85, .7);
+            border-radius: var(--radius);
+        }
+
+        .card h3 {
+            margin: 0 0 6px;
+            font-size: 16px;
+        }
+
+        .card p {
+            margin: 0 0 10px;
+            color: var(--muted);
+        }
+
+        .card ul {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--muted);
+        }
+
+        .card li {
+            margin: 6px 0;
+        }
+
+        h2 {
+            margin: 0 0 10px;
+            letter-spacing: -.3px;
+        }
+
+        small {
+            color: var(--muted);
+        }
+
+        /* Form layout */
+        .signup-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            /* SINGLE source of vertical spacing */
+            max-width: 520px;
+        }
+
+        /* Remove default margins Chrome adds */
+        .signup-form label {
+            margin: 0;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .signup-form input,
+        .signup-form select,
+        .signup-form textarea {
+            margin: 0;
+            /* critical */
+        }
+
+        /* Button spacing */
+        .signup-form button {
+            margin-top: 6px;
+        }
+
+
+        input,
+        select,
+        textarea,
+        button {
+            font: inherit;
+            border-radius: 12px;
+            border: 1px solid rgba(34, 48, 85, .9);
+            background: rgba(11, 16, 32, .55);
+            color: var(--text);
+            padding: 10px 12px;
+        }
+
+        footer {
+            max-width: var(--max);
+            margin: 24px auto 40px;
+            padding: 0 18px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        hr {
+            display: none;
+        }
+
+        @media (max-width: 900px) {
+            .grid3 {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            /* keep it conversion-focused */
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="brand">
+            <div class="mark" aria-hidden="true">p</div>
+            <div class="word" aria-label="picanik logo">
+                pica<span class="logo-accent">nik</span>
+            </div>
+        </div>
+
+        <nav>
+            <a href="#who">Who</a>
+            <a href="#why">Why</a>
+            <a href="#early-access">Early access</a>
+        </nav>
+    </header>
+
+
+    <hr />
+
+    <!-- HERO / ABOVE THE FOLD -->
+    <main>
+        <section id="top">
+            <h2>The mod infrastructure for Hytale.</h2>
+            <p>
+                Built for creators, server owners, and serious players.
+            </p>
+            <p>
+                Upload, version, and distribute Hytale mods without scattered links, broken downloads, or forum posts.
+            </p>
+
+            <p>
+                <a href="https://discord.gg/T6K8Pcc3wP" target="_blank" rel="noopener noreferrer">Join the Picanik
+                    Discord</a><br />
+                <small>Shape the platform before launch.</small>
+            </p>
+
+            <p>
+                <a href="#signup">Get Early Access Updates</a><br />
+                <small>No spam. Launch access, creator programs, and early tooling only.</small>
+            </p>
+
+            <p><strong>Unofficial. Community-built. Focused entirely on Hytale.</strong></p>
+        </section>
+
+        <hr />
+
+        <!-- WHO THIS IS FOR -->
+        <section id="who">
+            <h3>Who Picanik is for</h3>
+
+            <section>
+                <h4>Mod Developers</h4>
+                <p><strong>Build mods, not distribution pipelines.</strong></p>
+                <ul>
+                    <li>First-class file hosting (not just links)</li>
+                    <li>Proper versioning and changelogs</li>
+                    <li>Clear ownership of your releases</li>
+                    <li>A platform that treats modding as engineering</li>
+                </ul>
+                <p><a href="https://discord.gg/T6K8Pcc3wP" target="_blank" rel="noopener noreferrer">Join as a founding
+                        mod dev</a></p>
+            </section>
+
+            <section>
+                <h4>Server Owners</h4>
+                <p><strong>Stop managing mods manually.</strong></p>
+                <ul>
+                    <li>Reliable mod sources</li>
+                    <li>Version awareness</li>
+                    <li>Server-safe metadata</li>
+                    <li>A foundation for modpacks and automation</li>
+                </ul>
+                <p><a href="https://discord.gg/T6K8Pcc3wP" target="_blank" rel="noopener noreferrer">Join as a server
+                        operator</a></p>
+            </section>
+
+            <section>
+                <h4>Players</h4>
+                <p><strong>Mods without the mess.</strong></p>
+                <ul>
+                    <li>One place to find trusted mods</li>
+                    <li>Clear compatibility info</li>
+                    <li>No expired links or sketchy mirrors</li>
+                    <li>A growing ecosystem, not scattered files</li>
+                </ul>
+                <p><a href="https://discord.gg/T6K8Pcc3wP" target="_blank" rel="noopener noreferrer">Join early</a></p>
+            </section>
+        </section>
+
+        <hr />
+
+        <!-- WHY THIS EXISTS -->
+        <section id="why">
+            <h3>Why Picanik exists</h3>
+            <p>
+                Every modding community starts fragmented — Discord uploads, GitHub zips, forum posts, and temporary
+                links.
+            </p>
+            <p>
+                Picanik exists to give Hytale a real mod foundation from day one: a place where mods are hosted,
+                versions are tracked,
+                and creators and server owners aren’t forced to build their own infrastructure.
+            </p>
+        </section>
+
+        <hr />
+
+        <!-- WHAT THIS IS NOT -->
+        <section id="not">
+            <h3>What Picanik is not</h3>
+            <ul>
+                <li>Not a forum</li>
+                <li>Not a news site</li>
+                <li>Not a link aggregator</li>
+                <li>Not an in-game marketplace replacement</li>
+            </ul>
+            <p>
+                Picanik is external infrastructure — built to serve the ecosystem, not control it.
+            </p>
+        </section>
+
+        <hr />
+
+        <!-- EARLY ACCESS -->
+        <section id="early-access">
+            <h3>Early access is limited</h3>
+            <p>
+                We’re opening Picanik gradually with a small group of mod developers and server owners to shape the
+                platform before public launch.
+            </p>
+            <ul>
+                <li>Founding Creator roles</li>
+                <li>Early publishing access</li>
+                <li>Direct influence on features</li>
+                <li>Visibility when the ecosystem forms</li>
+            </ul>
+
+            <p>
+                <a href="https://discord.gg/T6K8Pcc3wP" target="_blank" rel="noopener noreferrer">Join the Discord</a>
+                &nbsp;|&nbsp;
+                Get Early Access Updates Using the Form
+            </p>
+        </section>
+
+        <hr />
+
+        <!-- EMAIL SIGNUP -->
+        <section id="signup">
+            <h3>Get Early Access Updates</h3>
+            <p>
+                No spam. Only early access, launch updates, and creator opportunities.
+            </p>
+
+
+            <form action="YOUR_EMAIL_FORM_ENDPOINT_HERE" method="post" class="signup-form">
+                <label for="email">Email address</label>
+                <input id="email" name="email" type="email" placeholder="you@example.com" required />
+
+                <label for="role">I am a...</label>
+                <select id="role" name="role" class="field-select" style="background:#0B1020;color:#EAF0FF;">
+                    <option value="mod_dev">Mod developer</option>
+                    <option value="server_owner">Server owner / operator</option>
+                    <option value="player">Player</option>
+                    <option value="tool_dev">Tool / integration developer</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <label for="notes">Optional: what are you building or running?</label>
+                <textarea id="notes" name="notes" rows="3"
+                    placeholder="Mod idea, server concept, tooling, etc."></textarea>
+
+                <button type="submit" class="btn btn-primary">Notify me</button>
+            </form>
+
+            <p>
+                Prefer Discord? <a href="https://discord.gg/T6K8Pcc3wP" target="_blank" rel="noopener noreferrer">Join
+                    here</a>.
+            </p>
+        </section>
+
+    </main>
+
+    <hr />
+
+    <!-- FOOTER -->
+    <footer id="footer">
+        <p>
+            Picanik is an unofficial, community-built platform and is not affiliated with Hypixel Studios or the Hytale
+            development team.
+        </p>
+
+        <p>
+            <a href="https://discord.gg/T6K8Pcc3wP" target="_blank" rel="noopener noreferrer">Discord</a> |
+            <a href="https://x.com/picanikgg" target="_blank" rel="noopener noreferrer">Twitter/X</a> |
+            <a href="../privacy.html">Privacy</a>
+        </p>
+
+        <p>
+            © <span id="year"></span> Picanik
+        </p>
+    </footer>
+
+    <script>
+        // set footer year
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+
+</body>
+
+</html>
