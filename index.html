@@ -238,6 +238,15 @@
             background: rgba(11, 16, 32, .45);
             border: 1px solid rgba(34, 48, 85, .7);
             border-radius: var(--radius);
+
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-height: 360px;
+        }
+
+        .card p:last-child {
+            margin-top: auto;
         }
 
         .card h3 {
@@ -245,19 +254,29 @@
             font-size: 16px;
         }
 
+        .card h4 {
+            min-height: 1.6em;
+        }
+
         .card p {
             margin: 0 0 10px;
             color: var(--muted);
+
+            max-width: 38ch;
         }
 
         .card ul {
             margin: 0;
             padding-left: 18px;
             color: var(--muted);
+
+            margin-top: 8px;
         }
 
         .card li {
             margin: 6px 0;
+
+            line-height: 1.45;
         }
 
         h2 {
@@ -388,47 +407,52 @@
         <hr />
 
         <!-- WHO THIS IS FOR -->
-        <section id="who">
+        <!-- WHO THIS IS FOR -->
+        <section id="who" class="section">
             <h3>Who Picanik is for</h3>
 
-            <section>
-                <h4>Mod Developers</h4>
-                <p><strong>Build mods, not distribution pipelines.</strong></p>
-                <ul>
-                    <li>First-class file hosting (not just links)</li>
-                    <li>Proper versioning and changelogs</li>
-                    <li>Clear ownership of your releases</li>
-                    <li>A platform that treats modding as engineering</li>
-                </ul>
-                <p><a href="https://discord.gg/T6K8Pcc3wP" target="_blank" rel="noopener noreferrer">Join as a founding
-                        mod dev</a></p>
-            </section>
+            <div class="grid3">
+                <section class="card">
+                    <h4>Mod Developers</h4>
+                    <p><strong>Build mods, not pipelines.</strong></p>
+                    <ul>
+                        <li>First-class file hosting</li>
+                        <li>Versioning and changelogs</li>
+                        <li>Clear ownership of your releases</li>
+                        <li>A platform that treats modding as engineering</li>
+                    </ul>
+                    <p><a href="https://discord.gg/T6K8Pcc3wP" target="_blank" rel="noopener noreferrer">Join as a
+                            founding mod dev</a></p>
+                </section>
 
-            <section>
-                <h4>Server Owners</h4>
-                <p><strong>Stop managing mods manually.</strong></p>
-                <ul>
-                    <li>Reliable mod sources</li>
-                    <li>Version awareness</li>
-                    <li>Server-safe metadata</li>
-                    <li>A foundation for modpacks and automation</li>
-                </ul>
-                <p><a href="https://discord.gg/T6K8Pcc3wP" target="_blank" rel="noopener noreferrer">Join as a server
-                        operator</a></p>
-            </section>
+                <section class="card">
+                    <h4>Server Owners</h4>
+                    <p><strong>Stop managing mods manually.</strong></p>
+                    <ul>
+                        <li>Reliable mod sources</li>
+                        <li>Version awareness</li>
+                        <li>Server-safe metadata</li>
+                        <li>A foundation for modpacks and automation</li>
+                    </ul>
+                    <p><a href="https://discord.gg/T6K8Pcc3wP" target="_blank" rel="noopener noreferrer">Join as a
+                            server operator</a></p>
+                </section>
 
-            <section>
-                <h4>Players</h4>
-                <p><strong>Mods without the mess.</strong></p>
-                <ul>
-                    <li>One place to find trusted mods</li>
-                    <li>Clear compatibility info</li>
-                    <li>No expired links or sketchy mirrors</li>
-                    <li>A growing ecosystem, not scattered files</li>
-                </ul>
-                <p><a href="https://discord.gg/T6K8Pcc3wP" target="_blank" rel="noopener noreferrer">Join early</a></p>
-            </section>
+                <section class="card">
+                    <h4>Players</h4>
+                    <p><strong>Mods without the mess.</strong></p>
+                    <ul>
+                        <li>One place to find trusted mods</li>
+                        <li>Clear compatibility info</li>
+                        <li>No expired or sketchy links</li>
+                        <li>A growing ecosystem, not scattered files</li>
+                    </ul>
+                    <p><a href="https://discord.gg/T6K8Pcc3wP" target="_blank" rel="noopener noreferrer">Join early</a>
+                    </p>
+                </section>
+            </div>
         </section>
+
 
         <hr />
 
